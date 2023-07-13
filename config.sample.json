@@ -3,6 +3,5 @@
   "clientSecret": "AAAAAAAAAAAAAAAAAAA",
   "redirectURL": "https://yourdomain.com/callback",
   "issuerURL": "https://yourdomain.com",
-  "serversToCheckRolesFor": [
-  ]
+  "kvKey": "twitter-keys"
 }

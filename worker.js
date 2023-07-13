@@ -16,7 +16,8 @@ const importAlgo = {
 
 async function loadOrGenerateKeyPair(KV) {
     let keyPair = {}
-    let keyPairJson = await KV.get('keys', {type: 'json'})
+    let keyKV = config.kvKey || 'keys'
+    let keyPairJson = await KV.get(keyKV, {type: 'json'})
 
     if (keyPairJson !== null) {
         keyPair.publicKey = await crypto.subtle.importKey('jwk', keyPairJson.publicKey, importAlgo, true, ['verify'])
@@ -26,7 +27,7 @@ async function loadOrGenerateKeyPair(KV) {
     } else {
         keyPair = await crypto.subtle.generateKey(algorithm, true, ['sign', 'verify'])
 
-        await KV.put('keys', JSON.stringify({
+        await KV.put(keyKV, JSON.stringify({
             privateKey: await crypto.subtle.exportKey('jwk', keyPair.privateKey),
             publicKey: await crypto.subtle.exportKey('jwk', keyPair.publicKey)
         }))
