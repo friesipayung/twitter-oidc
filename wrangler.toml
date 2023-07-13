@@ -1,7 +1,9 @@
 name = "twitter-oidc"
 main = "worker.js"
 compatibility_date = "2023-07-13"
-
+node_compat = true
 kv_namespaces = [
-    { binding = "KV", id = "1b9eb8b13d6a41aaaac1e17f844c0123", preview_id = "" }
+    { binding = "KV", id = "1b9eb8b13d6a41aaaac1e17f844c0123", preview_id = "1b9eb8b13d6a41aaaac1e17f844c0123" }
 ]
+[vars]
+WORKER_LOCATION = 'http://localhost:8787'

@@ -1,6 +1,10 @@
 import * as config from './config.json'
 import {Hono} from 'hono'
 import * as jose from 'jose'
+import '@worker-tools/location-polyfill';
+
+const passport = require('passport');
+const TwitterStrategy = require('passport-twitter').Strategy;
 
 const algorithm = {
     name: 'RSASSA-PKCS1-v1_5',
@@ -37,20 +41,67 @@ async function loadOrGenerateKeyPair(KV) {
 
 }
 
+passport.use('twitter', new TwitterStrategy({
+    consumerKey: config.consumerKey,
+    consumerSecret: config.consumerSecret,
+    callbackURL: config.callbackURL,
+}, ((accessToken, tokenSecret, profile, done) => {
+    // Compose auths.
+    const {id, username} = profile;
+    const auths = {
+        'name': username,
+        'type': 'twitter',
+        'ext_social_id': id,
+        'ext_auths': [{
+            'ext_type': 'TWITTER_OAUTH',
+            'content': {
+                'access_token': accessToken,
+                'access_token_secret': tokenSecret,
+            }
+        }],
+    };
+
+    const data = {
+        auths,
+    };
+
+    return done(null, data);
+})));
+
+
+function configureRedirect(req) {
+    req.session.redirect = req.query.redirect;
+}
+
+function authenticate(strategy, options) {
+    return (req, res, next) => {
+        configureRedirect(req);
+        const authenticator = passport.authenticate(strategy, options);
+
+        authenticator(req, res, next);
+    };
+}
+
 const app = new Hono()
 
 app.get('/authorize/:scopemode', async (c) => {
     // todo
+    authenticate('twitter', {
+        failureRedirect: '/',
+    })
 
+    return c.json({error: 'not implemented'})
 })
 
 app.post('/token', async (c) => {
     // todo
+    return c.json({error: 'not implemented'})
 
 })
 
 app.get('/userinfo', async (c) => {
     // todo
+    return c.json({error: 'not implemented'})
 
 })
 
