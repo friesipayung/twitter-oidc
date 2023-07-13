@@ -1,0 +1,46 @@
+# Ignore all files and folders in the .idea directory
+.idea/**
+
+# Ignore the project's build output
+*.iws
+*.iml
+*.ipr
+
+# Ignore the Gradle and Maven build directories
+build/
+target/
+
+# Ignore the Mongo Explorer plugin settings
+.idea/**/mongoSettings.xml
+
+# Ignore the file-based project format
+*.iws
+
+# Ignore IntelliJ's temporary files
+out/
+
+# Ignore the mpeltonen/sbt-idea plugin settings
+.idea_modules/
+
+# Ignore the JIRA plugin settings
+atlassian-ide-plugin.xml
+
+# Ignore the Cursive Clojure plugin settings
+.idea/replstate.xml
+
+# Ignore the SonarLint plugin settings
+.idea/sonarlint/
+
+# Ignore the Crashlytics plugin settings
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Ignore the Editor-based Rest Client settings
+.idea/httpRequests
+
+# Ignore Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+/config.json

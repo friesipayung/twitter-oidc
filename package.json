@@ -1,0 +1,16 @@
+{
+  "name": "twitter-oidc-worker",
+  "version": "1.0.0",
+  "description": "Twitter OIDC Wrapper in CloudFlare Workers",
+  "main": "worker.js",
+  "scripts": {
+    "start": "wrangler dev"
+  },
+  "author": "Friendly <friendly@volantis.io>",
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^2.6.2",
+    "jose": "^4.11.1",
+    "wrangler": "^2.6.2"
+  }
+}
